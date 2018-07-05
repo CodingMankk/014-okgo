@@ -1,18 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.codingman.www.a014_okgo.MainActivity">
 
+    <ProgressBar
+        android:id="@+id/pb"
+        android:layout_margin="3dp"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+
+        />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:text="GetImg"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:onClick="okGoGetBitmap"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:text="GetFile"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:onClick="okGoFileDownLoadSimple"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:text="PostStringText"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:onClick="okGoUpLoadStringText"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:text="PostStringText"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:onClick="okGoUpLoadStringText"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:text="PostJson"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:onClick="okGoPostJson"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:text="PostFile"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:onClick="okGoPostJson"
+            android:layout_height="wrap_content"/>
+
+
+
+
+
+
+    </LinearLayout>
+
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center"
+        android:textSize="15dp"/>
 
-</android.support.constraint.ConstraintLayout>
+
+    <ImageView
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:id="@+id/iv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+</LinearLayout>
