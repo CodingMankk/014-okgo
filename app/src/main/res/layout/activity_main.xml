@@ -1,91 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.codingman.www.a014_okgo.MainActivity">
 
     <ProgressBar
         android:id="@+id/pb"
-        android:layout_margin="3dp"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="10dp"
-
-        />
+        android:layout_margin="3dp" />
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <Button
-            android:text="GetImg"
+            android:textAllCaps="false"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="okGoGetBitmap"
-            android:layout_height="wrap_content"/>
+            android:text="GetImg"
+            android:textSize="10dp" />
 
         <Button
-            android:text="GetFile"
+            android:textAllCaps="false"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="okGoFileDownLoadSimple"
-            android:layout_height="wrap_content"/>
+            android:text="GetFile"
+            android:textSize="10dp" />
 
         <Button
-            android:text="PostStringText"
+            android:textAllCaps="false"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="okGoUpLoadStringText"
-            android:layout_height="wrap_content"/>
+            android:text="PostString"
+            android:textSize="10dp" />
+
 
         <Button
-            android:text="PostStringText"
+            android:textAllCaps="false"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="okGoUpLoadStringText"
-            android:layout_height="wrap_content"/>
-
-        <Button
+            android:onClick="okGoPostJson"
             android:text="PostJson"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:onClick="okGoPostJson"
-            android:layout_height="wrap_content"/>
+            android:textSize="10dp" />
 
         <Button
-            android:text="PostFile"
+            android:textAllCaps="false"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="okGoPostJson"
-            android:layout_height="wrap_content"/>
+            android:onClick="okGoPostOneFiles"
+            android:text="PostFile"
+            android:textSize="10dp" />
 
-
-
+        <Button
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="okGoSyncGet"
+            android:text="SyncGet"
+            android:textSize="10dp" />
 
 
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="okGoSyncGet"
+            android:text="SyncGet"
+            android:textSize="10dp" />
+
+        <Button
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="okGetWithParamsNoRequest"
+            android:text="GetNoBody"
+            android:textSize="10dp" />
+
+
+    </LinearLayout>
+
+
+
     <TextView
         android:id="@+id/tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
         android:layout_gravity="center"
-        android:textSize="15dp"/>
+        android:text="Hello World!"
+        android:textSize="15dp" />
 
 
     <ImageView
-        android:padding="5dp"
-        android:layout_margin="5dp"
         android:id="@+id/iv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp" />
 
 
 </LinearLayout>
