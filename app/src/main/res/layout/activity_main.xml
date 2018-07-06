@@ -90,7 +90,7 @@
             android:layout_weight="1"
             android:onClick="okGoSyncGet"
             android:text="SyncGet"
-            android:textSize="10dp" />
+            android:textSize="5dp" />
 
         <Button
             android:textAllCaps="false"
@@ -99,10 +99,87 @@
             android:layout_weight="1"
             android:onClick="okGetWithParamsNoRequest"
             android:text="GetNoBody"
-            android:textSize="10dp" />
+            android:textSize="5dp" />
+
+        <Button
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="okGoWithParams"
+            android:text="PostparamsNoFile"
+            android:textSize="5dp" />
+
+
+        <Button
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="okGoUrlWithParams"
+            android:text="PostUrlWithParamsNoFile"
+            android:textSize="5dp" />
+
+        <Button
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="okGoWithParamsWithFile"
+            android:text="PostUrlWithParamsWithFile"
+            android:textSize="5dp" />
+
+
+        <Button
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="okGoWithParamsMultipart"
+            android:text="PostUrlWithParamsNoFileMultipart"
+            android:textSize="5dp" />
+
+
+        <Button
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="okGoOneKey2Files"
+            android:text="okGoOneKey2Files"
+            android:textSize="5dp" />
 
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="okGoPostUpString"
+            android:text="PostUpString"
+            android:textSize="5dp" />
+
+        <Button
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="okGoPostUpJson"
+            android:text="PostUpJson"
+            android:textSize="5dp" />
+
+
+    </LinearLayout>
+
+
+
 
 
 

@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar mPb;
 
     private String mBaseUrl = "http://192.168.0.12/okhttpDemo";
+    private String mBaseOkGoUrl = "http://192.168.1.104/okGoServer";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,7 +168,13 @@ public class MainActivity extends AppCompatActivity {
         String mNativeUrlPic2 = "http://192.168.0.12:8080/2.jpg"; //本地tomcat服务器图片；
         String mNativeUrlPic3 = "http://192.168.0.12:8080/3.jpg"; //本地tomcat服务器图片；
 
-        OkGo.<Bitmap>get(mNativeUrlPic3)
+        String mNativeUrlPic4 = "http://192.168.1.104:8080/1.jpg"; //本地tomcat服务器图片；
+        String mNativeUrlPic5 = "http://192.168.1.104:8080/2.jpg"; //本地tomcat服务器图片；
+        String mNativeUrlPic6 = "http://192.168.1.104:8080/3.jpg"; //本地tomcat服务器图片；
+
+
+
+        OkGo.<Bitmap>get(mNativeUrlPic4)
                 .tag(this)
                 .execute(new BitmapCallback() {
                     @Override
@@ -208,12 +215,16 @@ public class MainActivity extends AppCompatActivity {
         String url = "https://mirrors.tuna.tsinghua.edu.cn/apache/struts/2.3.34/struts-2.3.34-all" +
                 ".zip";
 
-        String mNativeUrlFile = "http://192.168.0.12:8080/baiduditu.7z"; //本地tomcat服务器文件；
+        String url1 = "http://yc.jb51.net:81/201710/books/AndroidLauncher_jb51.net.rar";
 
-        final String fileName = getFileName(url);
+        String url2 = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530891265967&di=f3b0108bc890fac94c42a00f47b23957&imgtype=0&src=http%3A%2F%2Fpic20.photophoto.cn%2F20110902%2F0034034471873095_b.jpg";
+
+
+
+        final String fileName = getFileName(url2);
         String filePath = Environment.getExternalStorageDirectory().getAbsolutePath();
         Logger.i(filePath);
-        OkGo.<File>get(url)
+        OkGo.<File>get(url2)
                 .tag(this)
                 .execute(new FileCallback(filePath, fileName) {
                     @Override
@@ -506,8 +517,10 @@ public class MainActivity extends AppCompatActivity {
     public void okGetWithParamsNoRequest(View v){
 
         final String url = "http://192.168.0.12:8080/okhttpDemo/login";
+        final String url1 = "http://192.168.1.104:8080/okGoServer/login";
 
-        OkGo.<String>get(url)
+
+        OkGo.<String>get(url1)
                 .tag(this)
                 .params("paramskey1","111")
                 .params("paramskey2","222")
@@ -521,10 +534,225 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //POST, PUT, DELETE 等有请求体的传参
+
+    /**
+     * [13-1] 请求参数无文件
+     * @param
+     * @return
+     */
+
+    public void okGoWithParams(View view){
+
+        final String url = "http://192.168.1.104:8080/okGoServer/login";
+
+        OkGo.<String>post(url)
+                .tag(this)
+                .params("k1","v1")
+                .params("k2","v2")
+                .params("k3","v3")
+                .params("k4","我是中文测试文字")
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                    }
+                });
+    }
 
 
 
+    /**
+     * [13-2] 请求参数无文件-请求时候在url上拼接参数
+     * @param
+     * @return
+     */
 
+    public void okGoUrlWithParams(View view){
+
+        final String url = "http://192.168.1.104:8080/okGoServer/login";
+
+        OkGo.<String>post(url)
+                .tag(this)
+                .isSpliceUrl(true)  //不仅请求体有参数，url上也有参数了，默认情况下，这个参        数是false，只在你需要的情况下拼接就好了。
+                .params("k1","v1")
+                .params("k2","v2")
+                .params("k3","v3")
+                .params("k4","我是中文测试文字")
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                    }
+                });
+    }
+
+
+    /**
+     * [13-3] 请求参数有文件
+     * @param
+     * @return
+     */
+
+    public void okGoWithParamsWithFile(View view){
+
+        final String url = "http://192.168.1.104:8080/okGoServer/postFile";
+
+
+        String url1 = "http://yc.jb51.net:81/201710/books/AndroidLauncher_jb51.net.rar";
+
+        String url2 = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530891265967&di=f3b0108bc890fac94c42a00f47b23957&imgtype=0&src=http%3A%2F%2Fpic20.photophoto.cn%2F20110902%2F0034034471873095_b.jpg";
+
+        final String fileName = getFileName(url2);
+
+//        final String fileName = "AndroidLauncher_jb51.net.rar";
+        String filePath = Environment.getExternalStorageDirectory().getAbsolutePath();
+        File file  = new File(filePath,fileName);
+        if (!file.exists()) {
+            Toast.makeText(this, "file not exist!!!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        OkGo.<String>post(url)
+                .tag(this)
+                .params("k1","v1")
+                .params("k2","v2")
+                .params("k3","v3")
+                .params("k4","我是中文测试文字")
+                .params(fileName,file)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                    }
+                });
+    }
+
+
+    /**
+     * [13-4]请求参数没有文件，依然想用 multipart上传
+     * @param
+     * @return
+     */
+    public void okGoWithParamsMultipart(View view){
+
+        final String url = "http://192.168.1.104:8080/okGoServer/login";
+
+        OkGo.<String>post(url)
+                .tag(this)
+                .isMultipart(true)
+                .params("k1","v1")
+                .params("k2","v2")
+                .params("k3","v3")
+                .params("k4","我是中文测试文字")
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                    }
+                });
+    }
+
+
+    /**
+     * [13-4]一个key传多个值，或者多个文件怎么传
+     * @param
+     * @return
+     */
+    public void okGoOneKey2Files(View view){
+
+        final String url = "http://192.168.1.104:8080/okGoServer/login";
+
+        String url2 = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530891265967&di=f3b0108bc890fac94c42a00f47b23957&imgtype=0&src=http%3A%2F%2Fpic20.photophoto.cn%2F20110902%2F0034034471873095_b.jpg";
+
+        final String fileName = getFileName(url2);
+
+        //        final String fileName = "AndroidLauncher_jb51.net.rar";
+        String filePath = Environment.getExternalStorageDirectory().getAbsolutePath();
+        File file  = new File(filePath,fileName);
+        File file2  = new File(filePath,fileName);
+        if (!file.exists()) {
+            Toast.makeText(this, "file not exist!!!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        List<File> files = new ArrayList<>();
+        files.add(file);
+        files.add(file2);
+
+        List<String> params = new ArrayList<>();
+        params.add("111");
+        params.add("222");
+
+
+        OkGo.<String>post(url)
+                .tag(this)
+                .isMultipart(true)
+                .params("aaa","333")
+                .addUrlParams("bbb",params)
+                .addFileParams("ccc",files)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                    }
+                });
+    }
+
+    //=====================up系列传参方式介绍===================================
+    //
+
+
+    /**
+     * [14-1]
+     * @param
+     * @return
+     */
+
+
+    public void okGoPostUpString(View view){
+        final String url = "http://192.168.1.104:8080/okGoServer/login";
+        OkGo.<String>post(url)
+                .tag(this)
+                .upString("okGoPostUpString 测试代码")
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+
+                    }
+                });
+    }
+
+
+    /**
+     *
+     * @param view
+     */
+    public void okGoPostUpJson(View view) {
+
+        String url = "http://192.168.1.104:8080/okhttpDemo/postString";
+
+        Map<String, String> params = new HashMap<>();
+        params.put("k1", "String 1");
+        params.put("k2", "String 2");
+        params.put("k3", "from android device JsonString");
+
+        //使用fastJson解析
+        String s = JSONArray.toJSONString(params);
+
+        OkGo.<String>post(url)
+                .tag(this)
+                .upJson(s)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        if (response.isSuccessful()) {
+                            mTv.setText("服务器返回状态:" + response.toString());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        mTv.setText("服务器返回状态：" + response.getException().toString());
+                    }
+                });
+    }
 
 
 
