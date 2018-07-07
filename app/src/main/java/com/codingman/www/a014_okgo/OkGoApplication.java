@@ -6,8 +6,6 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.cookie.CookieJarImpl;
-import com.lzy.okgo.cookie.store.DBCookieStore;
-import com.lzy.okgo.cookie.store.MemoryCookieStore;
 import com.lzy.okgo.cookie.store.SPCookieStore;
 import com.lzy.okgo.https.HttpsUtils;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
@@ -57,8 +55,8 @@ public class OkGoApplication extends Application {
 
         //[3]配置cookie
         builder.cookieJar(new CookieJarImpl(new SPCookieStore(this)));
-        builder.cookieJar(new CookieJarImpl(new DBCookieStore(this)));
-        builder.cookieJar(new CookieJarImpl(new MemoryCookieStore()));
+//        builder.cookieJar(new CookieJarImpl(new DBCookieStore(this)));
+//        builder.cookieJar(new CookieJarImpl(new MemoryCookieStore()));
 
         //[4]信任所有证书？？？
         HttpsUtils.SSLParams sslParams1 = HttpsUtils.getSslSocketFactory();

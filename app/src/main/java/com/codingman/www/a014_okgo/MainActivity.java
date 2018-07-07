@@ -11,6 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONArray;
+import com.codingman.www.a014_okgo.callback.JsonCallBackOptimise;
+import com.codingman.www.a014_okgo.callback.JsonCallBackSimple;
+import com.codingman.www.a014_okgo.callback.jsondata.JsonObjectD;
+import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.adapter.Call;
 import com.lzy.okgo.cache.CacheMode;
@@ -19,20 +23,30 @@ import com.lzy.okgo.callback.Callback;
 import com.lzy.okgo.callback.FileCallback;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.convert.StringConvert;
+import com.lzy.okgo.cookie.store.CookieStore;
+import com.lzy.okgo.exception.HttpException;
+import com.lzy.okgo.exception.StorageException;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.PostRequest;
 import com.lzy.okgo.request.base.Request;
+import com.lzy.okgo.utils.IOUtils;
 import com.orhanobut.logger.Logger;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.Cookie;
+import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 
 public class MainActivity extends AppCompatActivity {
@@ -174,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        OkGo.<Bitmap>get(mNativeUrlPic4)
+        OkGo.<Bitmap>get(url)
                 .tag(this)
                 .execute(new BitmapCallback() {
                     @Override
@@ -720,7 +734,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     /**
-     *
+     *[14-2] upJson
      * @param view
      */
     public void okGoPostUpJson(View view) {
@@ -755,6 +769,169 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * [14-3] upFile
+     * @param
+     * @return
+     */
+
+    public void okGoPostUpFile(View view){
+
+        final String url = "http://192.168.1.104:8080/okGoServer/postFile";
+
+        String url1 = "http://yc.jb51.net:81/201710/books/AndroidLauncher_jb51.net.rar";
+
+        String url2 = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530891265967&di=f3b0108bc890fac94c42a00f47b23957&imgtype=0&src=http%3A%2F%2Fpic20.photophoto.cn%2F20110902%2F0034034471873095_b.jpg";
+
+        final String fileName = getFileName(url2);
+
+        //        final String fileName = "AndroidLauncher_jb51.net.rar";
+        String filePath = Environment.getExternalStorageDirectory().getAbsolutePath();
+        File file  = new File(filePath,fileName);
+        if (!file.exists()) {
+            Toast.makeText(this, "file not exist!!!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        OkGo.<String>post(url)
+                .tag(this)
+                .upFile(file)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                    }
+                });
+    }
+
+
+    /**
+     * [14-4] upByte
+     * @param
+     * @return
+     */
+
+    public void okGoPostUpBytes(View view){
+
+        final String url = "http://192.168.1.104:8080/okGoServer/postFile";
+
+        Map<String, String> params = new HashMap<>();
+        params.put("k1", "String 1");
+        params.put("k2", "String 2");
+        params.put("k3", "String 3");
+
+        byte[] bytes = IOUtils.toByteArray(params);
+        OkGo.<String>post(url)
+                .tag(this)
+                .upBytes(bytes)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                    }
+                });
+    }
+
+
+    /**
+     * [15-1] 自定义jsonCallBack的使用--解析普通数据
+     *
+     */
+
+    private void okGoCustomJsonCallBack(){
+        String url = "";
+        OkGo.<JsonObjectD>get(url)
+                .tag(this)
+                .execute(new JsonCallBackSimple<JsonObjectD>(JsonObjectD.class) {
+                    @Override
+                    public void onSuccess(Response<JsonObjectD> response) {
+
+                    }
+                });
+    }
+
+
+
+    /**
+     * [15-2] 自定义jsonCallBack的使用--解析集合数据
+     */
+
+    private void okGoCustomJsonCallBackParseList(){
+        String url = "";
+        TypeToken<List<JsonObjectD>> listTypeToken = new TypeToken<List<JsonObjectD>>(){};
+        Type type = listTypeToken.getType();
+        OkGo.<List<JsonObjectD>>get(url)
+                .tag(this)
+                .execute(new JsonCallBackSimple<List<JsonObjectD>>(type) {
+                    @Override
+                    public void onSuccess(Response<List<JsonObjectD>> response) {
+
+                    }
+                });
+    }
+
+
+    /**
+     *[16-1] 自定义jsonCallBack的使用--优化后的callback
+     */
+
+    private void okGoOptimizeCustomJsonCallBackParse(){
+        String url = "";
+
+        OkGo.<JsonObjectD>get(url)
+                .execute(new JsonCallBackOptimise<JsonObjectD>() { //不需要传递class
+                    @Override
+                    public void onSuccess(Response<JsonObjectD> response) {
+
+                    }
+                });
+
+    }
+
+
+
+    /**
+     *[16-2] 自定义jsonCallBack的使用--优化后的callback
+     */
+
+    private void okGoOptimizeCustomJsonCallBackParseSet(){
+        String url = "";
+        OkGo.<List<JsonObjectD>>get(url)
+                .execute(new JsonCallBackOptimise<List<JsonObjectD>>() {
+                    @Override
+                    public void onSuccess(Response<List<JsonObjectD>> response) {
+
+                    }
+                });
+    }
+
+    /**
+     * [17] 异常解析
+     * @param
+     * @return
+     */
+
+    private void okGoParseException(Response response){
+        Throwable exception = response.getException();
+        if (exception != null){
+            exception.printStackTrace();
+        }
+
+        if (exception instanceof UnknownHostException
+                || exception instanceof ConnectException){
+            Logger.d("网路连接失败，请重新连接网络");
+        }else if(exception instanceof SocketTimeoutException){
+            Logger.d("网络请求超时");
+        }else if (exception instanceof HttpException){
+            Logger.d("服务端响应404/500");
+        }else if(exception instanceof StorageException){
+            Logger.d("SD卡不存在或者没有权限");
+        }else if (exception instanceof IllegalStateException){
+            String message = exception.getMessage();
+            Logger.d(message);
+
+        }
+
+
+    }
 
 
 
@@ -780,6 +957,63 @@ public class MainActivity extends AppCompatActivity {
 //        OkGo.cancelAll(OkHttpClient);
 //        OkGo.cancelTag(OkHttpClient,"okGoPostFile");
     }
+
+
+    /**
+     * [18]查看某个url对应的全部cookie--空结果
+     */
+    public void getOkGoUrlCookieAll(View view){
+
+        String url = "https://timgsa.baidu" +
+                ".com/timg?image&quality=80&size=b9999_10000&sec=1530802143624&di" +
+                "=26ff85a74642bf0436b4c62cbf9f4c43&imgtype=0&src=http%3A%2F%2Fpic5.photophoto" +
+                ".cn%2F20071228%2F0034034901778224_b.jpg";
+        CookieStore cookieStore =
+                OkGo.getInstance().getCookieJar().getCookieStore();
+        HttpUrl httpUrl = HttpUrl.parse(url);
+        List<Cookie> cookie =
+                cookieStore.getCookie(httpUrl);
+        Logger.d(httpUrl.host()+"对应的cookie如下："+cookie.toString());
+    }
+
+    /**
+     * [19] 查看okGo管理的所有的cookie--空结果
+     */
+    public void okGoGetAllCookies(View view){
+        CookieStore cookieStore = OkGo.getInstance().getCookieJar().getCookieStore();
+        List<Cookie> allCookie = cookieStore.getAllCookie();
+        Logger.d("所有的cookie如下："+allCookie.toString());
+    }
+
+
+    /**
+     * [20] 手动添加自己的cookie
+     */
+
+    private void okGOAddCustomCookie(){
+
+        String url = "https://timgsa.baidu" +
+                ".com/timg?image&quality=80&size=b9999_10000&sec=1530802143624&di" +
+                "=26ff85a74642bf0436b4c62cbf9f4c43&imgtype=0&src=http%3A%2F%2Fpic5.photophoto" +
+                ".cn%2F20071228%2F0034034901778224_b.jpg";
+
+
+        HttpUrl httpUrl = HttpUrl.parse(url);
+        Cookie.Builder builder = new Cookie.Builder();
+        Cookie cookie = builder.name("customCookieKey1")
+                .value("customCookieValue1")
+                .domain(httpUrl.host())
+                .build();
+
+        CookieStore cookieStore = OkGo.getInstance().getCookieJar().getCookieStore();
+        cookieStore.saveCookie(httpUrl,cookie);
+
+        //手动移除cookie
+        cookieStore.removeCookie(httpUrl);
+
+    }
+
+
 }
 
 

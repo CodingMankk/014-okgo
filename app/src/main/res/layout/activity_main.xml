@@ -175,9 +175,44 @@
             android:text="PostUpJson"
             android:textSize="5dp" />
 
+        <Button
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="okGoPostUpFile"
+            android:text="PostUpFile"
+            android:textSize="5dp" />
+
+        <Button
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="okGoPostUpBytes"
+            android:text="PostUpBytes"
+            android:textSize="10dp" />
+
+        <Button
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="getOkGoUrlCookieAll"
+            android:text="UrlCookieAll"
+            android:textSize="10dp" />
+
+
+        <Button
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="okGoGetAllCookies"
+            android:text="GetAllCookies"
+            android:textSize="10dp" />
 
     </LinearLayout>
-
 
 
 
