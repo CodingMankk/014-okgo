@@ -1,0 +1,51 @@
+=======================================================================
+[bug-1] 现象:在执行下列操作之后，restart下载文件，报错以下bug；
+操作为：start()--remove--remove(true)--restart()
+
+## Caused by: java.lang.IllegalStateException:
+   you must call DownloadTask#save() before DownloadTask#start()！
+
+ Process: com.oztaking.www.okgodownloaddemo, PID: 1866
+ java.lang.IllegalStateException: Could not execute method for android:onClick
+     at android.support.v7.app.AppCompatViewInflater$DeclaredOnClickListener.onClick(AppCompatViewInflater.java:293)
+     at android.view.View.performClick(View.java:4780)
+     at android.view.View$PerformClick.run(View.java:19866)
+     at android.os.Handler.handleCallback(Handler.java:739)
+     at android.os.Handler.dispatchMessage(Handler.java:95)
+     at android.os.Looper.loop(Looper.java:135)
+     at android.app.ActivityThread.main(ActivityThread.java:5254)
+     at java.lang.reflect.Method.invoke(Native Method)
+     at java.lang.reflect.Method.invoke(Method.java:372)
+     at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:903)
+     at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:698)
+  Caused by: java.lang.reflect.InvocationTargetException
+     at java.lang.reflect.Method.invoke(Native Method)
+     at java.lang.reflect.Method.invoke(Method.java:372)
+     at android.support.v7.app.AppCompatViewInflater$DeclaredOnClickListener.onClick(AppCompatViewInflater.java:288)
+     at android.view.View.performClick(View.java:4780) 
+     at android.view.View$PerformClick.run(View.java:19866) 
+     at android.os.Handler.handleCallback(Handler.java:739) 
+     at android.os.Handler.dispatchMessage(Handler.java:95) 
+     at android.os.Looper.loop(Looper.java:135) 
+     at android.app.ActivityThread.main(ActivityThread.java:5254) 
+     at java.lang.reflect.Method.invoke(Native Method) 
+     at java.lang.reflect.Method.invoke(Method.java:372) 
+     at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:903) 
+     at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:698) 
+  Caused by: java.lang.IllegalStateException: you must call DownloadTask#save() before DownloadTask#start()！
+     at com.lzy.okserver.download.DownloadTask.start(DownloadTask.java:151)
+     at com.lzy.okserver.download.DownloadTask.restart(DownloadTask.java:182)
+     at com.oztaking.www.okgodownloaddemo.MainActivity.restart(MainActivity.java:227)
+     at java.lang.reflect.Method.invoke(Native Method) 
+     at java.lang.reflect.Method.invoke(Method.java:372) 
+     at android.support.v7.app.AppCompatViewInflater$DeclaredOnClickListener.onClick(AppCompatViewInflater.java:288) 
+     at android.view.View.performClick(View.java:4780) 
+     at android.view.View$PerformClick.run(View.java:19866) 
+     at android.os.Handler.handleCallback(Handler.java:739) 
+     at android.os.Handler.dispatchMessage(Handler.java:95) 
+     at android.os.Looper.loop(Looper.java:135) 
+     at android.app.ActivityThread.main(ActivityThread.java:5254) 
+     at java.lang.reflect.Method.invoke(Native Method) 
+     at java.lang.reflect.Method.invoke(Method.java:372) 
+     at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:903) 
+     at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:698) 

@@ -343,7 +343,6 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-
     /**
      * [7] 上传文件--一个key对应于多个文件-未测试
      *
@@ -1012,7 +1011,6 @@ public class MainActivity extends AppCompatActivity {
         cookieStore.removeCookie(httpUrl);
 
     }
-
 
 }
 

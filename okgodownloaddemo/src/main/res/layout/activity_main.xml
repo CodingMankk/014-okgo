@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/item_layout"/>
+
+    <TextView
+        android:id="@+id/tv_msg"
+        android:text="信息显示："
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:textSize="15dp"
+            android:layout_margin="2dp"
+            android:id="@+id/btn_start"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="#cccccc"
+            android:onClick="start"
+            android:text="开始"/>
+
+        <Button
+            android:textSize="15dp"
+            android:layout_margin="2dp"
+            android:id="@+id/btn_pause"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="#cccccc"
+            android:onClick="pause"
+            android:text="暂停"/>
+
+        <Button
+            android:textSize="15dp"
+            android:layout_margin="2dp"
+            android:id="@+id/btn_remove"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="#cccccc"
+            android:onClick="remove"
+            android:text="删除任务"/>
+
+        <Button
+            android:textSize="15dp"
+            android:layout_margin="2dp"
+            android:id="@+id/btn_remove_Delete"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="#cccccc"
+            android:onClick="removeDelete"
+            android:text="删除任务文件"/>
+
+        <Button
+            android:textSize="15dp"
+            android:layout_margin="2dp"
+            android:id="@+id/btn_restart"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="#cccccc"
+            android:onClick="restart"
+            android:text="重新下载"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:textSize="15dp"
+            android:layout_margin="2dp"
+            android:id="@+id/btn_startAll"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:onClick="startAll"
+            android:layout_height="match_parent"
+            android:background="#cccccc"
+            android:text="开始All"/>
+
+        <Button
+            android:textSize="15dp"
+            android:layout_margin="2dp"
+            android:id="@+id/btn_pauseAll"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="#cccccc"
+            android:onClick="pauseAll"
+            android:text="暂停All"/>
+
+        <Button
+            android:textSize="15dp"
+            android:layout_margin="2dp"
+            android:id="@+id/btn_removeAll"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="#cccccc"
+            android:onClick="removeAll"
+            android:text="删除任务All"/>
+
+        <Button
+            android:textSize="15dp"
+            android:layout_margin="2dp"
+            android:id="@+id/btn_remove_DeleteAll"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="#cccccc"
+            android:onClick="removeDeleteAll"
+            android:text="删除任务文件All"/>
+
+        <Button
+            android:textSize="15dp"
+            android:layout_margin="2dp"
+            android:id="@+id/btn_getAllTask"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="#cccccc"
+            android:onClick="getTaskMap"
+            android:text="打印All任务"/>
+
+        <Button
+            android:textSize="15dp"
+            android:layout_margin="2dp"
+            android:id="@+id/btn_getTagTask"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="#cccccc"
+            android:onClick="getTask"
+            android:text="打印tagTask"/>
+
+        <Button
+            android:textSize="15dp"
+            android:layout_margin="2dp"
+            android:id="@+id/btn_hasTask"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="#cccccc"
+            android:onClick="hasTask"
+            android:text="打印tagTask"/>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
